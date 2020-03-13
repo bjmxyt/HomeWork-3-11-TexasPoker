@@ -5,24 +5,15 @@ class TestPoker(unittest.TestCase):
         assert play("Black: 3S 4C 6D 3H 5C  White: 2S 8S AS QS 3S") == "Black wins"
         assert play("Black: 3D 4H 6D JS KC  White: 2C 3H 4S 8C KH") == "Black wins"
 
-    def test_White_Win(self):
-        assert play("Black: 3D 4H 6D JH KC  White: 2H 3C 4H 8S AC") == "White wins"
-        assert play("Black: 3H 4H 6D JS KC  White: 2S AH AC AD AC") == "White wins"
-
     def test_Tie(self):
         assert play("Black: 2H 3D 5S 9C KD  White: 2D 3H 5C 9S KH") == "Tie"
         assert play("Black: 2H 3H 4H 5H 6H  White: 2C 3C 4C 5C 6C") == "Tie"
 
-def parseInput(myinput):
-    hands = {}
-    hand_length = 6
-    splitinput = [x for x in myinput.split(' ') if x.strip() != '']
-    while len(splitinput) > 0:
-        playerhand = splitinput[0:hand_length]
-        player = playerhand.pop(0).replace(":", "")
-        hands[player] = playerhand
-        splitinput = splitinput[hand_length:]
-    return hands
+    def test_White_Win(self):
+        assert play("Black: 3D 4H 6D JH KC  White: 2H 3C 4H 8S AC") == "White wins"
+        assert play("Black: 3H 4H 6D JS KC  White: 2S AH AC AD AC") == "White wins"
+
+
 
 def getValue(card):
     valuemap = {
@@ -43,6 +34,17 @@ def getValue(card):
         "0": 0  # Filler as a default value
     }
     return valuemap[card[0]]
+
+def parseInput(myinput):
+    hands = {}
+    hand_length = 6
+    splitinput = [x for x in myinput.split(' ') if x.strip() != '']
+    while len(splitinput) > 0:
+        playerhand = splitinput[0:hand_length]
+        player = playerhand.pop(0).replace(":", "")
+        hands[player] = playerhand
+        splitinput = splitinput[hand_length:]
+    return hands
 
 def isSeq(vals):
     vals.sort()
